@@ -2,15 +2,15 @@ const express = require('express');
 
 const burger = require('../models/burger.js');
 
-const app = express();
+const router = express.Router()
 
 // Routes 
 
-app.get('/', function (req, res) {
+router.get('/', function (req, res) {
     res.redirect('/index');
   });
 
-  app.get('/index', function (req, res) {
+  router.get('/index', function (req, res) {
     burger.selectAll(function(data) {
       const hbsObject = { burgers: data };
       res.render('index', hbsObject);
@@ -19,7 +19,7 @@ app.get('/', function (req, res) {
   
 //   Create Burger 
 
-  app.post('/burger/create', function (req, res) {
+router.post('/burger/create', function (req, res) {
     burger.insertOne(req.body.burger_name, function() {
       res.redirect('/index');
     });
@@ -27,10 +27,10 @@ app.get('/', function (req, res) {
   
 //   Devour Burger 
 
-  app.post('/burger/eat/:id', function (req, res) {
+router.post('/burger/eat/:id', function (req, res) {
     burger.updateOne(req.params.id, function() {
       res.redirect('/index');
     });
   });
 
-  module.exports = app;
+  module.exports = router;

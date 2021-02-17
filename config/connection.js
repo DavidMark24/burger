@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const env = require("dotenv").config() ;
+const env = require('dotenv').config();
 
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -10,12 +10,12 @@ const connection = mysql.createConnection({
   database: 'burgers_db',
 });
 
-connection.connect((err) => {
-  if (err) {
-    console.error(`error connecting: ${err.stack}`);
-    return;
-  }
-  console.log(`connected as id ${connection.threadId}`);
-});
+// connection.connect((err) => {
+//   if (err) {
+//     console.error(`error connecting: ${err.stack}`);
+//     return;
+//   }
+//   console.log(`connected as id ${connection.threadId}`);
+// });
 
 module.exports = connection;
